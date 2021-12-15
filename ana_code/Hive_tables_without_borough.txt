@@ -1,0 +1,9 @@
+create table nyc_temp_day(day STRING, time INT, avg_temp DOUBLE) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE;
+
+load data inpath 'hdfs://horton.hpc.nyu.edu:8020/user/ht1128/project/cleanEdit/part-r-00000' overwrite into table nyc_temp_day;
+
+create table nyc_crash_edit_new(day STRING, time INT, num_crash INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE;
+
+load data inpath 'hdfs://horton.hpc.nyu.edu:8020/user/ht1128/project/new_crash.csv' overwrite into table nyc_crash_edit_new;
+
+create table new_nyc_temp_crash_edit row format delimited fields terminated by '|' stored as RCFile as select a.day,a.time, a.avg_temp,b.num_crash from nyc_temp_day as a inner join nyc_crash_edit_new as b on a.day = from_unixtime(unix_timestamp(b.day,'mm/dd/yy'),'mm/dd/YYYY') and a.time = b.time;

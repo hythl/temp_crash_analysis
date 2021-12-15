@@ -1,0 +1,23 @@
+select corr(temperature,num_crash) from nyc_combine_crash;
+
+select corr(avg_temp, num_crash) from new_nyc_temp_crash_edit;
+
+select avg(num_crash) from new_nyc_temp_crash_edit where temp>=86;
+
+select avg(num_crash) from new_nyc_temp_crash_edit where temp<86;
+
+select avg(num_crash) from new_nyc_temp_crash_edit where avg_temp>=86 and time>=8 and time<=18;
+
+select avg(num_crash) from new_nyc_temp_crash_edit where avg_temp<86 and time>=8 and time<=18;
+
+select avg(sum_crash) from new_nyc_weather_dayunit where rain=0;
+
+select avg(sum_crash) from new_nyc_weather_dayunit where rain>0;
+
+select avg(sum_crash) from new_nyc_weather_dayunit where snow>0;   
+
+select avg(sum_crash) from new_nyc_weather_dayunit where snow=0;   
+
+select avg(sum_crash) from new_nyc_weather_dayunit where snow>100;
+
+select avg(sum_crash) from new_nyc_weather_dayunit where rain>100;                                                                                                    _crash_edit where temp>=86;

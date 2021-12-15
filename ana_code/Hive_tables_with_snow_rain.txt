@@ -1,0 +1,7 @@
+create table nyc_weather(day STRING, rain Double, snow DOUBLE) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE;
+
+load data inpath 'hdfs://horton.hpc.nyu.edu:8020/user/ht1128/project/full/part-r-00000' overwrite into table nyc_weather;
+
+create table new_nyc_crash_dayunit row format delimited fields terminated by '|' stored as RCFile as select day,sum(num_crash) as sum_crash from new_nyc_crash_edit_new group  by day;
+
+create table new_nyc_weather_dayunit row format delimited fields terminated by '|' stored as RCFile as select a.day, s.sum_crash, b.snow,b.rain from new_nyc_crash_dayunit as a inner join nyc_weather as b on a.day = b.day;

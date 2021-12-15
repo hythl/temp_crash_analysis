@@ -1,0 +1,5 @@
+In this project, we used dataset provided by https://opendata.cityofnewyork.us/ and https://www.ncei.noaa.gov/access/search/data-search/daily-summaries?pageNum=1&bbox=40.965,-74.257,40.465,-73.757.
+
+So what we need to do to upload the data is only to use the scp and put.
+
+for example  scp /c/Users/17186/Downloads/nyc_temp_full_new.csv ht1128@peel.hpc.nyu.edu:/home/ht1128

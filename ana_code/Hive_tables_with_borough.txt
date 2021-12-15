@@ -1,0 +1,6 @@
+create table nyc_crash(day STRING, time Int, Borough String, num_crash Int) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE;
+
+create table nyc_temperature_crash(day STRING, time INT, Borough STRING, temperature DOUBLE) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE;
+
+create table nyc_combine_temp_crash row format delimited fields terminated by '|' stored as RCFile as select nyc.day,nyc.time,nyc.borough,nyc.temperature,nyc_crash.num_crash from nyc_temperature_crash as nyc inner join nyc_crash on nyc_crash.day = nyc.day and nyc_crash.time = nyc.time and LOWER(nyc_crash.borough) = LOWER(nyc.borough);
+
